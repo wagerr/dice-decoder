@@ -1,3 +1,3 @@
 # dice-decoder
 
-Simple tool for getting dice result from result hash.
+Simple tool for getting wagerr dice result from result hash.
