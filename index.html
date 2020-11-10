@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>Dice Result Breakdown Page </title>
+    <style>
+
+    </style>
+    <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+    <style type="text/css">
+        body {
+            background-color: White;
+            text-align: center;
+            color: Black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hash-input {
+            width: 450px;
+            height: 25px;
+        }
+
+        .seperator {
+
+            margin: 20px 0 20px 0;
+        }
+    </style>
+    <script type="text/javascript">
+        function executeResultBreakdown() {
+
+            const get64 = (value, n = 0) => (value.shiftRight(bigInt(64 * n))).and(bigInt("ffffffffffffffff", 16));
+            const toNumber = value => +value.toString();
+
+
+            var hash = bigInt(document.getElementById("resultHash").value, 16)
+            var dice1 = toNumber(get64(hash, 0).mod(bigInt(6)).plus(bigInt(1)));
+            var dice2 = toNumber(get64(hash, 1).mod(bigInt(6)).plus(bigInt(1)));
+
+
+            document.getElementById("dice1").innerHTML = "<strong>Dice 1:</strong> " + dice1;
+            document.getElementById("dice2").innerHTML = "<strong>Dice 2:</strong> " + dice2;
+
+
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <table align="center">
+        <tr>
+            <td colspan="2">
+                <p>Enter Dice Result Hash here:</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"> <input type="text" value="" class="hash-input" id="resultHash" /> </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="Execute Result Breakdown" onclick="executeResultBreakdown()" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <hr class="seperator" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label id="dice1">Dice1 : 2 </label>
+            </td>
+            <td>
+                <label id="dice2">
+                    Dice2: 3
+                </label>
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>
